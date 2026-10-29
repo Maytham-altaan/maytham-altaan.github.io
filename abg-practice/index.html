@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ABG Practice Set</title>
+<meta name="description" content="Six real ABG printouts with the diagnosis hidden, plus the formula toolkit for group practice.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: a lab-bench handout — sticky printout tabs, each printout as photo + transcribed values, then the formula toolkit. */
+:root{
+  --paper:#f5f6f9; --card:#ffffff; --ink:#17203a; --muted:#5a6476; --rule:#d9dee8;
+  --navy:#1d3557; --red:#b3122e; --soft:#eef1f6; --chip:#e6ebf3; --onnavy:#ffffff;
+  --display:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1522; --card:#171f30; --ink:#e7ebf3; --muted:#9aa5b8; --rule:#2a3448;
+    --navy:#9fb8dd; --red:#ff7d8f; --soft:#1d2638; --chip:#232d42; --onnavy:#0f1522; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1522; --card:#171f30; --ink:#e7ebf3; --muted:#9aa5b8; --rule:#2a3448;
+  --navy:#9fb8dd; --red:#ff7d8f; --soft:#1d2638; --chip:#232d42; --onnavy:#0f1522; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:28px 18px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);font-weight:700}
+h1{font-family:var(--display);font-size:clamp(28px,6vw,40px);line-height:1.1;margin:6px 0 8px;text-wrap:balance}
+.lead{color:var(--muted);max-width:62ch;margin:0}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--rule);border-radius:999px;padding:5px 12px 5px 6px;font-size:14px;display:flex;align-items:center;gap:8px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--navy);color:var(--onnavy);font-weight:700;font-size:12px}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+nav.tabs .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.tabs a{flex:0 0 auto;text-decoration:none;color:var(--ink);background:var(--chip);border-radius:8px;padding:7px 13px;font-weight:700;font-size:14px}
+nav.tabs a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+nav.tabs a.tool{background:var(--navy);color:var(--onnavy)}
+main{padding-block:8px 48px;display:grid;gap:28px}
+section.printout{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 64px);background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:18px;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px}
+@media (max-width:720px){section.printout{grid-template-columns:minmax(0,1fr)}}
+.ph h2{font-family:var(--display);font-size:24px;margin:0 0 2px}
+.ph .when{color:var(--muted);font-size:13px;margin:0 0 12px}
+.photo{display:block;width:100%;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#fff;padding:0;cursor:zoom-in}
+.photo img{display:block;width:100%;height:auto}
+.hint{font-size:13px;color:var(--muted);margin:6px 0 0}
+.vals{min-width:0}
+.vals h3,.tk h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.v{background:var(--soft);border-radius:8px;padding:8px 10px}
+.v span{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.v b{font-family:var(--mono);font-size:18px;font-variant-numeric:tabular-nums;font-weight:600}
+.v i{font-style:normal;font-size:12px;color:var(--muted);margin-left:4px}
+.ask{margin-top:14px;border-top:1px dashed var(--rule);padding-top:12px;font-size:15px}
+.ask strong{color:var(--red)}
+#toolkit{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 64px)}
+#toolkit h2{font-family:var(--display);font-size:28px;margin:8px 0 4px}
+#toolkit > p{color:var(--muted);margin:0 0 14px}
+.tk{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:14px}
+.box{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px;min-width:0}
+.box h4{font-family:var(--display);font-size:18px;margin:0 0 10px;color:var(--navy)}
+.f{font-family:var(--mono);font-size:14.5px;font-weight:600;background:var(--soft);border-radius:6px;padding:6px 8px;margin:0 0 8px;overflow-x:auto;white-space:nowrap}
+.box ul{margin:0;padding-left:18px;font-size:15px}
+.box li{margin:3px 0}
+.comp{overflow-x:auto;margin-top:14px;background:var(--card);border:1px solid var(--rule);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{background:var(--navy);color:var(--onnavy);font-size:13px;letter-spacing:.04em}
+td.fx{font-family:var(--mono);font-weight:600;font-size:13.5px}
+tr:last-child td{border-bottom:0}
+.rule{margin-top:14px;background:var(--navy);color:var(--onnavy);border-radius:10px;padding:12px 14px;font-weight:700}
+.apps{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.apps a{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:10px 14px;color:var(--ink);text-decoration:none;font-weight:700}
+footer{color:var(--muted);font-size:13px;padding-block:0 32px}
+.lb{position:fixed;inset:0;z-index:20;background:rgba(10,14,24,.92);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 52px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(12px,env(safe-area-inset-left,0px))}
+.lb img{display:block;width:min(1100px,200%);max-width:none;margin:0 auto;background:#fff}
+.lb button{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:max(12px,env(safe-area-inset-right,0px));font:inherit;font-weight:700;border:0;border-radius:8px;padding:8px 14px;background:#fff;color:#17203a;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header class="top wrap">
+  <div class="eyebrow">ABG interpretation · group practice</div>
+  <h1>Six real printouts. Your group decides the diagnosis.</h1>
+  <p class="lead">Each sheet is a real Radiometer ABL800 report with the ward's diagnosis hidden. Solve by hand with the six steps, then check with Residipok. Every formula you need is in the toolkit at the bottom.</p>
+  <ol class="steps">
+    <li>Validity</li><li>pH</li><li>Primary process</li><li>Compensation</li><li>Anion gap + delta</li><li>Extras: O₂, lactate, K⁺</li>
+  </ol>
+</header>
+
+<nav class="tabs" aria-label="Printouts">
+  <div class="wrap" id="tabs"></div>
+</nav>
+
+<main class="wrap" id="main"></main>
+
+<div class="wrap">
+  <section id="toolkit">
+    <h2>Toolkit</h2>
+    <p>Predict, then compare with what the sheet measured. Inside the range = appropriate compensation; outside = a second disorder.</p>
+    <div class="tk">
+      <div class="box">
+        <h4>1 · Is the sheet valid?</h4>
+        <p class="f">[H⁺] = 24 × PaCO₂ ÷ HCO₃⁻</p>
+        <ul>
+          <li>[H⁺] ≈ 80 − pH digits (pH 7.20–7.50)</li>
+          <li>Otherwise [H⁺] = 10^(9 − pH)</li>
+          <li>pH = 6.1 + log [HCO₃⁻ ÷ (0.03 × PaCO₂)]</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h4>2–3 · Normal values and primary process</h4>
+        <ul>
+          <li>pH 7.35–7.45 · PaCO₂ 35–45 (40) · HCO₃⁻ 22–26 (24)</li>
+          <li>pH ↓ + HCO₃⁻ ↓ → metabolic acidosis</li>
+          <li>pH ↓ + PaCO₂ ↑ → respiratory acidosis</li>
+          <li>pH ↑ + HCO₃⁻ ↑ → metabolic alkalosis</li>
+          <li>pH ↑ + PaCO₂ ↓ → respiratory alkalosis</li>
+        </ul>
+      </div>
+    </div>
+    <div class="comp">
+      <table>
+        <thead><tr><th>4 · Primary disorder</th><th>Predict</th><th>Formula</th><th>If the measured value is outside</th></tr></thead>
+        <tbody>
+          <tr><td>Metabolic acidosis</td><td>PaCO₂</td><td class="fx">1.5 × HCO₃⁻ + 8 ± 2 (Winter)</td><td>Above → + resp acidosis<br>Below → + resp alkalosis</td></tr>
+          <tr><td>Metabolic alkalosis</td><td>PaCO₂</td><td class="fx">40 + 0.7 × (HCO₃⁻ − 24) ± 2</td><td>Below → + resp alkalosis<br>Above → + resp acidosis</td></tr>
+          <tr><td>Respiratory acidosis</td><td>HCO₃⁻</td><td class="fx">Acute: 24 + 1 × (PaCO₂ − 40) ÷ 10<br>Chronic: 24 + 3.5 × (PaCO₂ − 40) ÷ 10</td><td>Below acute → + met acidosis<br>Above chronic → + met alkalosis</td></tr>
+          <tr><td>Respiratory alkalosis</td><td>HCO₃⁻</td><td class="fx">Acute: 24 − 2 × (40 − PaCO₂) ÷ 10<br>Chronic: 24 − 5 × (40 − PaCO₂) ÷ 10</td><td>Above acute → + met alkalosis<br>Below chronic → + met acidosis</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rule">Respiratory problem → the kidney compensates → predict HCO₃⁻. Metabolic problem → the lungs compensate → predict PaCO₂.</p>
+    <div class="tk" style="margin-top:14px">
+      <div class="box">
+        <h4>5 · Anion gap</h4>
+        <p class="f">AG = Na⁺ − (Cl⁻ + HCO₃⁻)</p>
+        <ul><li>Normal 12 ± 4</li><li>Add 2.5 for every 10 g/L albumin below 40</li><li>&gt; 16 → high-gap acidosis (GOLD MARK)</li></ul>
+      </div>
+      <div class="box">
+        <h4>5 · Delta ratio</h4>
+        <p class="f">(AG − 12) ÷ (24 − HCO₃⁻)</p>
+        <ul><li>&lt; 0.8 → HAGMA + NAGMA</li><li>0.8–2 → pure HAGMA</li><li>&gt; 2 → HAGMA + metabolic alkalosis</li></ul>
+      </div>
+      <div class="box">
+        <h4>6 · Osmolar gap</h4>
+        <p class="f">Measured − (2 × Na⁺ + Glu ÷ 18 + BUN ÷ 2.8)</p>
+        <ul><li>Glucose and BUN in mg/dL</li><li>&gt; 10 abnormal · &gt; 20 → toxic alcohol</li></ul>
+      </div>
+      <div class="box">
+        <h4>6 · Oxygenation</h4>
+        <p class="f">PAO₂ = FiO₂ × 713 − PaCO₂ ÷ 0.8</p>
+        <ul><li>Room air ≈ 150 − 1.25 × PaCO₂</li><li>A–a = PAO₂ − PaO₂ (normal ≈ age ÷ 4 + 4)</li><li>P/F = PaO₂ ÷ FiO₂: ≤ 300 mild · ≤ 200 moderate · ≤ 100 severe</li></ul>
+      </div>
+      <div class="box">
+        <h4>6 · Urine tests</h4>
+        <p class="f">UAG = U-Na⁺ + U-K⁺ − U-Cl⁻</p>
+        <ul><li>Negative → gut loss · Positive → RTA</li><li>Urine Cl⁻ &lt; 20 → saline-responsive alkalosis</li><li>Urine Cl⁻ &gt; 20 → saline-resistant</li></ul>
+      </div>
+      <div class="box">
+        <h4>6 · Content and conversions</h4>
+        <p class="f">CaO₂ = 1.34 × Hb × SaO₂ + 0.003 × PaO₂</p>
+        <ul><li>Glucose mg/dL ÷ 18 = mmol/L</li><li>Creatinine mg/dL × 88.4 = µmol/L</li><li>Nasal O₂: FiO₂ ≈ 0.21 + 0.04 × L/min</li></ul>
+      </div>
+    </div>
+    <h2 style="margin-top:26px;font-size:22px">Check your answer with Residipok</h2>
+    <p style="color:var(--muted);margin:0">Solve by hand first. Then open the ABG Interpreter in Residipok and type pH, pCO₂, HCO₃⁻ and the anion gap.</p>
+    <div class="apps">
+      <a href="https://apps.apple.com/app/id6768218005" target="_blank" rel="noopener">iPhone · App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.resipoc.app" target="_blank" rel="noopener">Android · Google Play</a>
+    </div>
+  </section>
+</div>
+
+<footer class="wrap" style="padding-top:24px">Arterial Blood Gas Interpretation · Al-Jubori · Baghdad Medical City. Values transcribed from the printouts; patient identifiers removed.</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-label="Printout full size">
+  <button type="button" id="lbClose">Close</button>
+  <img id="lbImg" alt="">
+</div>
+
+<script>
+(function(){
+  var P = [
+    {n:6, when:'28 Oct 2022 · 01:04', v:[['pH','7.542',''],['pCO₂','30.8','mmHg'],['pO₂','53.3','mmHg'],['HCO₃⁻','26.4','mmol/L'],['Base excess','+3.7','mmol/L'],['Na⁺','139','mmol/L'],['K⁺','2.7','mmol/L'],['Cl⁻','101','mmol/L'],['Ca²⁺ (ionised)','0.82','mmol/L'],['Glucose','124','mg/dL'],['Lactate','2.3','mmol/L'],['Creatinine','0.40','mg/dL'],['Hb','6.0','g/dL'],['sO₂','90.6','%'],['Anion gap (sheet)','11.8','mmol/L']]},
+    {n:7, when:'12 Oct 2022 · 07:25', v:[['pH','7.434',''],['pCO₂','41.3','mmHg'],['pO₂','61.0','mmHg'],['HCO₃⁻','27.2','mmol/L'],['Base excess','+3.2','mmol/L'],['Na⁺','133','mmol/L'],['K⁺','4.7','mmol/L'],['Cl⁻','96','mmol/L'],['Ca²⁺ (ionised)','0.82','mmol/L'],['Glucose','73','mg/dL'],['Lactate','1.5','mmol/L'],['Creatinine','0.13','mg/dL'],['Hb','7.5','g/dL'],['sO₂','90.8','%'],['Anion gap (sheet)','9.7','mmol/L']]},
+    {n:8, when:'23 Oct 2022 · 03:36 · children’s hospital', v:[['pH','7.355',''],['pCO₂','29.6','mmHg'],['pO₂','216','mmHg'],['HCO₃⁻','16.1','mmol/L'],['Base excess','−8.3','mmol/L'],['Na⁺','135','mmol/L'],['K⁺','3.0','mmol/L'],['Cl⁻','100','mmol/L'],['Ca²⁺ (ionised)','0.63','mmol/L'],['Glucose','89','mg/dL'],['Lactate','1.2','mmol/L'],['Creatinine','0.84','mg/dL'],['Hb','10.8','g/dL'],['sO₂','99.5','%'],['Anion gap (sheet)','19.4','mmol/L']]},
+    {n:9, when:'28 Oct 2022 · 10:51', v:[['pH','6.860',''],['pCO₂','12.9','mmHg'],['pO₂','82.2','mmHg'],['HCO₃⁻','2.2','mmol/L'],['Base excess','−28.5','mmol/L'],['Na⁺','144','mmol/L'],['K⁺','4.7','mmol/L'],['Cl⁻','116','mmol/L'],['Ca²⁺ (ionised)','0.98','mmol/L'],['Glucose','508','mg/dL'],['Lactate','1.5','mmol/L'],['Creatinine','0.50','mg/dL'],['Hb','11.9','g/dL'],['sO₂','89.6','%'],['Anion gap (sheet)','25.5','mmol/L']]},
+    {n:10, when:'7 Oct 2022 · 21:09', v:[['pH','7.468',''],['pCO₂','31.2','mmHg'],['pO₂','233','mmHg'],['HCO₃⁻','22.3','mmol/L'],['Base excess','−0.9','mmol/L'],['Na⁺','149','mmol/L'],['K⁺','2.1','mmol/L'],['Cl⁻','115','mmol/L'],['Ca²⁺ (ionised)','0.92','mmol/L'],['Glucose','97','mg/dL'],['Lactate','1.3','mmol/L'],['Creatinine','0.39','mg/dL'],['Hb','10.5','g/dL'],['sO₂','100.3','%'],['Anion gap (sheet)','11.8','mmol/L']]},
+    {n:11, when:'27 Oct 2022 · 23:32', v:[['pH','7.572',''],['pCO₂','39.7','mmHg'],['pO₂','148','mmHg'],['HCO₃⁻','36.7','mmol/L'],['Base excess','+13.2','mmol/L'],['Na⁺','149','mmol/L'],['K⁺','2.3','mmol/L'],['Cl⁻','94','mmol/L'],['Ca²⁺ (ionised)','0.56','mmol/L'],['Glucose','90','mg/dL'],['Lactate','0.7','mmol/L'],['Creatinine','0.24','mg/dL'],['Hb','10.1','g/dL'],['sO₂','99.3','%'],['Anion gap (sheet)','17.6','mmol/L']]}
+  ];
+  var tabs = document.getElementById('tabs'), main = document.getElementById('main');
+  P.forEach(function(p){
+    var a = document.createElement('a'); a.href = '#p' + p.n; a.textContent = 'Printout ' + p.n; tabs.appendChild(a);
+    var s = document.createElement('section'); s.className = 'printout'; s.id = 'p' + p.n;
+    var img = 'abg' + (p.n < 10 ? '0' : '') + p.n + '.jpg';
+    s.innerHTML =
+      '<div class="ph"><h2>Printout ' + p.n + '</h2><p class="when">' + p.when + '</p>' +
+      '<button type="button" class="photo" data-src="' + img + '" aria-label="Open printout ' + p.n + ' full size"><img src="' + img + '" alt="ABG printout ' + p.n + ' with the diagnosis covered" loading="lazy"></button>' +
+      '<p class="hint">Tap the sheet to open it full size.</p></div>' +
+      '<div class="vals"><h3>Values from the sheet</h3><div class="grid">' +
+      p.v.map(function(r){ return '<div class="v"><span>' + r[0] + '</span><b>' + r[1] + '</b><i>' + r[2] + '</i></div>'; }).join('') +
+      '</div><p class="ask"><strong>Your group:</strong> every disorder present, the number that proves it, the likely cause, and the first treatment step.</p></div>';
+    main.appendChild(s);
+  });
+  var t = document.createElement('a'); t.href = '#toolkit'; t.className = 'tool'; t.textContent = 'Toolkit'; tabs.appendChild(t);
+
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
+  main.addEventListener('click', function(e){
+    var b = e.target.closest('.photo'); if (!b) return;
+    lbImg.src = b.getAttribute('data-src'); lbImg.alt = b.getAttribute('aria-label'); lb.hidden = false;
+    document.getElementById('lbClose').focus();
+  });
+  function close(){ lb.hidden = true; lbImg.removeAttribute('src'); }
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !lb.hidden) close(); });
+})();
+</script>
+
+</body>
+</html>
